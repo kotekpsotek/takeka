@@ -1,4 +1,4 @@
-<script>
+<script lang=ts>
   import { onMount } from 'svelte';
   import Icon from '@iconify/svelte';
   import { _, isLoading } from 'svelte-i18n';
@@ -7,18 +7,25 @@
   import { navigate, currentRoute } from '../router.js';
   import { motionInView, staggerAnimate } from '../utils/motion.js';
   import ThemeLogo from './ThemeLogo.svelte';
+  import { theme, THEMES } from '../stores/theme.js';
+  import { isSearchOpen, isLeftStripeToggled } from "../stores/state.js";
   
   export let isOpen = false;
   
-  let sidebarElement;
   let menuItemsElements = [];
   // Track expanded submenus
   let expandedMenus = {
     auth: false
   };
   
+  interface MenuItem {
+    path: string
+    icon: string
+    name: string
+  }
+  
   // Create translated menu items with fallbacks
-  $: translatedMenuItems = [
+  const translatedMenuItems: MenuItem[] = [
     { path: '/', icon: 'heroicons:home', name: $isLoading ? 'Home' : $_('navigation.home') },
     { path: '/users', icon: 'heroicons:users', name: $isLoading ? 'Users' : $_('navigation.users') },
     { path: '/products', icon: 'heroicons:cube', name: $isLoading ? 'Products' : $_('navigation.products') },
@@ -28,59 +35,15 @@
     { path: '/gantt', icon: 'heroicons:calendar', name: $isLoading ? 'Gantt' : 'Gantt' },
     { path: '/maps', icon: 'heroicons:map', name: $isLoading ? 'Maps' : $_('navigation.maps') },
     { path: '/schedule', icon: 'heroicons:calendar-days', name: $isLoading ? 'Schedule' : $_('navigation.schedule') },
-    { path: '/profile', icon: 'heroicons:user-circle', name: $isLoading ? 'Profile' : $_('navigation.profile') },
-    { path: '/settings', icon: 'heroicons:cog-6-tooth', name: $isLoading ? 'Settings' : $_('navigation.settings') }
   ];
+  /* { path: '/profile', icon: 'heroicons:user-circle', name: $isLoading ? 'Profile' : $_('navigation.profile') },
+  { path: '/settings', icon: 'heroicons:cog-6-tooth', name: $isLoading ? 'Settings' : $_('navigation.settings') } */
   
-  // Create authentication submenu
-  $: authSubmenu = {
-    title: $isLoading ? 'Authentication' : $_('navigation.authentication'),
-    icon: 'heroicons:lock-closed',
-    items: [
-      { 
-        title: $isLoading ? 'Login V1' : $_('navigation.login_v1'), 
-        path: '/auth/login', 
-        icon: 'heroicons:arrow-right-on-rectangle' 
-      },
-      { 
-        title: $isLoading ? 'Login V2' : $_('navigation.login_v2'), 
-        path: '/auth/login-v2', 
-        icon: 'heroicons:arrow-right-on-rectangle' 
-      },
-      { 
-        title: $isLoading ? 'Login V3' : $_('navigation.login_v3'), 
-        path: '/auth/login-v3', 
-        icon: 'heroicons:arrow-right-on-rectangle' 
-      },
-      { 
-        title: $isLoading ? 'Register V1' : $_('navigation.register_v1'), 
-        path: '/auth/register', 
-        icon: 'heroicons:user-plus' 
-      },
-      { 
-        title: $isLoading ? 'Register V2' : $_('navigation.register_v2'), 
-        path: '/auth/register-v2', 
-        icon: 'heroicons:user-plus' 
-      },
-      { 
-        title: $isLoading ? 'Register V3' : $_('navigation.register_v3'), 
-        path: '/auth/register-v3', 
-        icon: 'heroicons:user-plus' 
-      }
-    ]
-  };
-  
-  onMount(() => {
-    // Animate menu items on mount
-    if (menuItemsElements.length > 0) {
-      staggerAnimate(menuItemsElements, 'fadeInLeft', { delay: 0.1 });
-    }
-    
-    // Auto-expand authentication submenu if we're on an auth page
-    if ($currentRoute.startsWith('/auth/')) {
-      expandedMenus.auth = true;
-    }
-  });
+  //
+  const secondCattegoryMenu: MenuItem[] = [
+    { path: "/help", icon: "material-symbols:help-outline-rounded", name: $isLoading ? "Help" : $_("second_cattegory.help") },
+    { path: "/repo-settings", icon: "material-symbols:settings-outline-rounded", name: $isLoading ? "Repo Settings" : $_("second_cattegory.repo_settings") }
+  ]
   
   function closeSidebar() {
     // Optionally close sidebar on mobile
@@ -108,6 +71,18 @@
     if (!submenu) return false;
     return submenu.some(item => item.path === $currentRoute);
   }
+
+  function onDirectToProfile() {
+
+  }
+
+  function onSearchToggle() {
+    $isSearchOpen = !isSearchOpen;
+  }
+
+  function onStripeToggle() {
+    $isLeftStripeToggled = !$isLeftStripeToggled;
+  }
   
   // Add logout function
   function handleLogout() {
@@ -131,6 +106,18 @@
       navigate(randomLoginPath);
     }, 150);
   }
+
+  onMount(() => {
+    // Animate menu items on mount
+    if (menuItemsElements.length > 0) {
+      staggerAnimate(menuItemsElements, 'fadeInLeft', { delay: 0.1 });
+    }
+    
+    // Auto-expand authentication submenu if we're on an auth page
+    if ($currentRoute.startsWith('/auth/')) {
+      expandedMenus.auth = true;
+    }
+  });
 </script>
 
 <!-- Mobile backdrop -->
@@ -142,95 +129,148 @@
 {/if}
 
 <!-- Sidebar -->
-<div class="fixed inset-y-0 left-0 z-50 w-64 bg-base-100 shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 {isOpen ? 'translate-x-0' : '-translate-x-full'} flex flex-col h-full">
+<div 
+  class="fixed inset-y-0 left-0 z-50 w-64 bg-base-100 shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 {isOpen ? 'translate-x-0' : '-translate-x-full'} flex flex-col h-full"
+>
   <!-- Logo section -->
-  <div class="flex items-center justify-center h-16 px-6 border-b border-base-300 flex-shrink-0">
-    <ThemeLogo width="w-32" height="h-8" alt="Takeka Logo" />
-  </div>
-  
-  <!-- Navigation section - takes up remaining space -->
-  <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-    {#each translatedMenuItems as item, index}
-      <a
-        bind:this={menuItemsElements[index]}
-        href={item.path}
-        class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 {$currentRoute === item.path ? 'bg-blue-500/10 text-blue-600 border border-blue-500/20' : 'text-base-content/70 hover:bg-base-200 hover:text-base-content'}"
-        on:click|preventDefault={() => handleMenuClick(item.path)}
-        use:motionInView={{ animation: 'fadeInLeft', delay: index * 0.1 }}
+  <div 
+    class="upper-section w-full flex justify-between items-center border-b border-base-300 px-1"
+  >
+    <div class="flex items-center justify-center h-16 px-6 flex-shrink-0">
+      <ThemeLogo width="w-32" height="h-8" alt="Takeka Logo" />
+    </div>
+
+    <div 
+      class="interaction-side flex gap-2"
+    >
+      <button 
+        class="p-0.5 hover:text-os2-200"
+        on:click={onStripeToggle}
       >
-        <Icon icon={item.icon} class="w-5 h-5 mr-3" />
-        {item.name}
-        {#if $currentRoute === item.path}
-          <div class="ml-auto w-2 h-2 bg-blue-500 rounded-full"></div>
-        {/if}
-      </a>
-    {/each}
-    
-    <!-- Authentication submenu -->
-    <div class="mt-6">
-      <div class="text-xs font-medium text-base-content/50 uppercase px-4 mb-2">
-        {$isLoading ? 'Account' : $_('navigation.account')}
+        <Icon 
+          icon="material-symbols:dock-to-right-outline"
+          class="w-5 h-5"
+        />
+      </button>
+
+      <button 
+        class="p-0.5"
+        on:click={onSearchToggle}
+      >
+        <Icon 
+          icon="material-symbols:search"
+          class="w-5 h-5 {isSearchOpen ? "text-os2-200" : ""}"
+        />
+      </button>  
+    </div>
+  </div>
+
+  <div 
+    id="stripe-content"
+    class="px-2 h-fit"
+  >
+    <div
+      id="workspace-and-selection"
+      class="border border-base-300 mt-3 p-1.5 rounded-lg flex gap-2 border-base-300 { $theme === THEMES.DARK ? 'bg-gray-200/5' : 'bg-gray-200/40' } flex justify-center items-center text-gray-400"
+    >
+      <img 
+        class="w-[30px] h-[30px] rounded-lg"
+        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.sT8k3iBCnoa8rztWqNbtfAHaHa%3Fpid%3DApi&f=1&ipt=59e0abd9357c91461b0de4046d921a82c90ea28b6d7e27a679689659dffdeb6a&ipo=images" 
+        alt=""
+      />
+
+      <div 
+        class="textual w-full"
+      >
+        <p id="workspace-name" class="text-sm font-semibold">ca</p>
+        <p id="workspace-role" class="text-xs text-gray-500">Admin</p>
       </div>
-      <div class="submenu">
-        <button 
-          class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 {isSubmenuActive(authSubmenu.items) ? 'bg-blue-500/10 text-blue-600 border border-blue-500/20' : 'text-base-content/70 hover:bg-base-200 hover:text-base-content'}"
-          on:click={() => toggleSubmenu('auth')}
-        >
-          <div class="flex items-center">
-            <Icon icon={authSubmenu.icon} class="w-5 h-5 mr-3" />
-            {authSubmenu.title}
-          </div>
-          <Icon 
-            icon={expandedMenus.auth ? 'heroicons:chevron-down' : 'heroicons:chevron-right'} 
-            class="w-4 h-4 transition-transform"
-          />
-        </button>
-        
-        {#if expandedMenus.auth}
-          <div class="ml-4 pl-4 border-l border-base-300 mt-1 space-y-1">
-            {#each authSubmenu.items as subitem}
-              <a
-                href={subitem.path}
-                class="w-full flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 {$currentRoute === subitem.path ? 'bg-blue-500/10 text-blue-600 border border-blue-500/20' : 'text-base-content/70 hover:bg-base-200 hover:text-base-content'}"
-                on:click|preventDefault={() => handleMenuClick(subitem.path)}
-              >
-                <Icon icon={subitem.icon} class="w-4 h-4 mr-3" />
-                {subitem.title}
-                {#if $currentRoute === subitem.path}
-                  <div class="ml-auto w-2 h-2 bg-blue-500 rounded-full"></div>
-                {/if}
-              </a>
-            {/each}
-          </div>
-        {/if}
+
+      <div
+        class="p-1 border border-base-300 rounded-lg bg-gray-200/7"
+      >
+        <Icon 
+          icon="material-symbols:double-arrow-rounded"
+        />
       </div>
     </div>
-  </nav>
+    
+    <div
+      class="pt-6 pb-3 flex flex-col justify-between h-full"
+    >
+      <!-- Navigation section - takes up remaining space -->
+      <nav class="flex-1 space-y-2 overflow-y-auto">
+        {#each translatedMenuItems as item, index}
+          <a
+            bind:this={menuItemsElements[index]}
+            href={item.path}
+            class="w-full flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 {$currentRoute === item.path ? 'bg-blue-500/10 text-blue-600 border border-blue-500/20' : 'text-base-content/70 hover:bg-base-200 hover:text-base-content'}"
+            on:click|preventDefault={() => handleMenuClick(item.path)}
+            use:motionInView={{ animation: 'fadeInLeft', delay: index * 0.1 }}
+          >
+            <Icon icon={item.icon} class="w-5 h-5 mr-3" />
+            {item.name}
+            {#if $currentRoute === item.path}
+              <div class="ml-auto w-2 h-2 bg-blue-500 rounded-full"></div>
+            {/if}
+          </a>
+        {/each}
+      </nav>
   
-  <!-- User section - always at bottom -->
-  <div class="border-t border-base-300 p-4 flex-shrink-0 mt-auto">
-    <div class="flex items-center">
-      <img 
-        src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" 
-        alt="User avatar"
-        class="w-10 h-10 rounded-full object-cover bg-base-200"
-      >
-      <div class="ml-3 flex-1 min-w-0">
-        <p class="text-sm font-medium text-base-content truncate">John Doe</p>
-        <p class="text-xs text-base-content/60 truncate">john.doe@example.com</p>
-      </div>
-      <div class="flex items-center gap-2">
-        <button 
-          class="p-1.5 rounded-md text-base-content/60 hover:text-red-600 hover:bg-red-100 transition-colors"
-          on:click={handleLogout}
-          title={$_('common.logout')}
-        >
-          <Icon icon="heroicons:arrow-right-on-rectangle" class="w-5 h-5" />
-        </button>
-        <button class="p-1.5 rounded-md text-base-content/60 hover:text-base-content hover:bg-base-200">
-          <Icon icon="heroicons:ellipsis-vertical" class="w-5 h-5" />
-        </button>
+      <!-- For selected repo  -->
+      <nav class="flex flex-col gap-1.5 space-y-0.5 overflow-y-auto pt-2 border-t border-base-300">
+        {#each secondCattegoryMenu as secondCattegoryItem, i}
+          <a
+            bind:this={menuItemsElements[i]}
+            href={secondCattegoryItem.path}
+            class="w-full flex items-center p-2 px-4 text-xs font-medium rounded-lg transition-colors duration-200 {$currentRoute === secondCattegoryItem.path ? 'bg-blue-500/10 text-blue-600 border border-blue-500/20' : 'text-base-content/50 hover:bg-base-200 hover:text-base-content'}"
+            on:click|preventDefault={() => handleMenuClick(secondCattegoryItem.path)}
+            use:motionInView={{ animation: 'fadeInLeft', delay: i * 0.1 }}
+          >
+            <Icon icon={secondCattegoryItem.icon} class="w-5 h-5 mr-3" />
+            {secondCattegoryItem.name}
+            {#if $currentRoute === secondCattegoryItem.path}
+              <div class="ml-auto w-2 h-2 bg-blue-500 rounded-full"></div>
+            {/if}
+          </a>
+        {/each}
+      </nav>
+    </div>
+    
+    <!-- User section - always at bottom -->
+    <div>
+      <div class="border border-base-300 p-2.5 rounded-lg flex-shrink-0 mt-auto {$theme === THEMES.LIGHT ? "bg-gray-200/40" : ""}">
+        <div class="flex items-center">
+          <img 
+            src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" 
+            alt="User avatar"
+            class="w-10 h-10 rounded-full object-cover bg-base-200"
+          >
+          <div class="ml-3 flex-1 min-w-0">
+            <p class="text-sm font-medium text-base-content truncate">John Doe</p>
+            <p class="text-xs text-base-content/60 truncate">john.doe@example.com</p>
+          </div>
+          <div class="flex items-center gap-1">
+            <button 
+              class="p-1.5 rounded-md text-base-content/60 hover:text-red-600 hover:bg-base-200 transition-colors"
+              on:click={handleLogout}
+              title={$_('common.logout')}
+            >
+              <Icon icon="heroicons:arrow-right-on-rectangle" class="w-5 h-5" />
+            </button>
+            <button 
+              class="p-1.5 rounded-md text-base-content/60 hover:text-base-content hover:bg-base-200"
+              on:click={onDirectToProfile}
+            >
+              <Icon icon="heroicons:ellipsis-vertical" class="w-5 h-5" />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div> 
+
+<style>
+  @reference "../../app.css";
+</style>
