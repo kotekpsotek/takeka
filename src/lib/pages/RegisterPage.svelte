@@ -4,6 +4,7 @@
   import { motionInView, motionHover } from '../utils/motion.js';
   import Icon from '@iconify/svelte';
   import { _ } from 'svelte-i18n';
+  import { theme } from '../stores/theme.js';
   
   let fullName = '';
   let email = '';
@@ -22,20 +23,20 @@
   }
 </script>
 
-<div class="min-h-screen bg-base-100 flex items-center justify-center p-4 relative overflow-hidden">
+<div class="min-h-screen bg-base-100 flex items-center justify-center p-4 relative overflow-hidden" data-theme={$theme}>
   <!-- Animated background -->
-  <div class="absolute inset-0 bg-gradient-to-br from-[#6366f1]/20 via-[#f8fafc] to-[#0ea5e9]/20">
+  <div class="absolute inset-0 bg-gradient-to-br from-os2-100/20 via-[#f8fafc] to-[#0ea5e9]/20">
     <div class="absolute inset-0 bg-grid-white/[0.2] bg-[length:20px_20px]" style="mask-image: radial-gradient(white, transparent 70%)"></div>
   </div>
   
   <!-- Animated orbs -->
-  <div class="absolute top-0 -left-4 w-72 h-72 bg-[#6366f1]/30 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+  <div class="absolute top-0 -left-4 w-72 h-72 bg-os2-100/30 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
   <div class="absolute top-0 -right-4 w-72 h-72 bg-[#0ea5e9]/30 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
   <div class="absolute -bottom-8 left-20 w-72 h-72 bg-[#14b8a6]/30 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
 
   <div class="max-w-md w-full relative">
     <!-- Glass card effect -->
-    <div class="backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 p-6 md:p-8 rounded-xl shadow-[0_2px_8px_-3px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-3px_rgba(0,0,0,0.3)] border border-gray-100 dark:border-gray-700/50" 
+    <div class="backdrop-blur-sm bg-base-100 p-6 md:p-8 rounded-xl shadow-[0_2px_8px_-3px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_8px_-3px_rgba(0,0,0,0.3)] border border-gray-100 dark:border-gray-700/50" 
          use:motionInView={{ animation: 'fadeInUp' }}>
       <!-- Logo -->
       <div class="flex justify-center mb-6" use:motionInView={{ animation: 'fadeInDown' }}>
@@ -55,7 +56,7 @@
           <label for="fullName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{$_('auth.full_name')}</label>
           <div class="relative group">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Icon icon="heroicons:user" class="h-5 w-5 text-gray-400 group-focus-within:text-[#6366f1] transition-colors" />
+              <Icon icon="heroicons:user" class="h-5 w-5 text-gray-400 group-focus-within:text-os2-100 transition-colors" />
             </div>
             <input
               id="fullName"
@@ -64,7 +65,7 @@
               autocomplete="name"
               required
               bind:value={fullName}
-              class="block w-full pl-10 py-2.5 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-[#6366f1]/20 focus:border-[#6366f1] transition-all"
+              class="block w-full pl-10 py-2.5 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-os2-100/20 focus:border-os2-100 transition-all"
               placeholder="John Doe"
             />
           </div>
@@ -74,7 +75,7 @@
           <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{$_('auth.email')}</label>
           <div class="relative group">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Icon icon="heroicons:envelope" class="h-5 w-5 text-gray-400 group-focus-within:text-[#6366f1] transition-colors" />
+              <Icon icon="heroicons:envelope" class="h-5 w-5 text-gray-400 group-focus-within:text-os2-100 transition-colors" />
             </div>
             <input
               id="email"
@@ -83,7 +84,7 @@
               autocomplete="email"
               required
               bind:value={email}
-              class="block w-full pl-10 py-2.5 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-[#6366f1]/20 focus:border-[#6366f1] transition-all"
+              class="block w-full pl-10 py-2.5 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-os2-100/20 focus:border-os2-100 transition-all"
               placeholder="name@example.com"
             />
           </div>
@@ -93,7 +94,7 @@
           <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{$_('auth.password')}</label>
           <div class="relative group">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Icon icon="heroicons:lock-closed" class="h-5 w-5 text-gray-400 group-focus-within:text-[#6366f1] transition-colors" />
+              <Icon icon="heroicons:lock-closed" class="h-5 w-5 text-gray-400 group-focus-within:text-os2-100 transition-colors" />
             </div>
             <input
               id="password"
@@ -102,7 +103,7 @@
               autocomplete="new-password"
               required
               bind:value={password}
-              class="block w-full pl-10 py-2.5 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-[#6366f1]/20 focus:border-[#6366f1] transition-all"
+              class="block w-full pl-10 py-2.5 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-os2-100/20 focus:border-os2-100 transition-all"
               placeholder="••••••••"
             />
           </div>
@@ -116,7 +117,7 @@
               type="checkbox"
               required
               bind:checked={agreeToTerms}
-              class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-[#6366f1] focus:ring-[#6366f1]/20 transition-colors"
+              class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-os2-100 focus:ring-os2-100/20 transition-colors"
             />
           </div>
           <label for="agree-terms" class="ml-2 block text-sm text-gray-600 dark:text-gray-400">
@@ -127,7 +128,7 @@
         <div use:motionInView={{ animation: 'fadeInUp', delay: 0.7 }}>
           <button
             type="submit"
-            class="relative w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white bg-[#6366f1] hover:bg-[#4f46e5] rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6366f1] transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.01]"
+            class="relative w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white bg-os2-100 disabled:hover:bg-os2-100 hover:bg-os2-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-os2-100 transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.01]"
             class:loading={isLoading}
             disabled={isLoading || !agreeToTerms}
           >
@@ -144,8 +145,8 @@
         <div class="absolute inset-0 flex items-center">
           <div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
         </div>
-        <div class="relative flex justify-center text-sm">
-          <span class="px-4 text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800">{$_('auth.or')}</span>
+        <div class="relative flex justify-center text-sm ">
+          <span class="px-4 text-gray-500 dark:text-gray-400 bg-base-100 ">{$_('auth.or')}</span>
         </div>
       </div>
       
@@ -153,24 +154,24 @@
       <div class="grid grid-cols-3 gap-2" use:motionInView={{ animation: 'fadeInUp', delay: 0.9 }}>
         <button
           type="button"
-          class="inline-flex items-center justify-center px-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all hover:scale-[1.01]"
+          class="button-option"
           use:motionHover
         >
           <Icon icon="logos:google-icon" class="h-5 w-5" />
         </button>
         <button
-          type="button"
-          class="inline-flex items-center justify-center px-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all hover:scale-[1.01]"
+        type="button"
+        class="button-option"
           use:motionHover
-        >
-          <Icon icon="logos:github-icon" class="h-5 w-5" />
+          >
+          <Icon icon="logos:facebook" class="h-5 w-5" />
         </button>
         <button
           type="button"
-          class="inline-flex items-center justify-center px-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all hover:scale-[1.01]"
+          class="button-option"
           use:motionHover
         >
-          <Icon icon="logos:facebook" class="h-5 w-5" />
+          <Icon icon="logos:github-icon" class="h-5 w-5" />
         </button>
       </div>
       
@@ -181,7 +182,7 @@
           <a 
             href="/auth/login" 
             on:click|preventDefault={() => navigate('/auth/login')}
-            class="font-medium text-[#6366f1] hover:text-[#4f46e5] transition-colors ml-1"
+            class="font-medium text-os2-100 hover:text-os2-200 transition-colors ml-1"
             use:motionHover
           >
             <Icon icon="heroicons:arrow-right-on-rectangle" class="h-5 w-5 mr-1 inline-block" />
@@ -194,6 +195,12 @@
 </div>
 
 <style>
+  @reference "../../app.css";
+  
+  .button-option {
+    @apply inline-flex items-center justify-center px-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium bg-base-100 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all hover:scale-[1.01];
+  }
+  
   .animate-blob {
     animation: blob 7s infinite;
   }

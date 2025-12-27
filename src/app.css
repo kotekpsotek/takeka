@@ -1,15 +1,28 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@plugin "daisyui" {
+  themes: light --default, black --prefersdark;
+  --color-base-400: "#0f0f0fff";
+}
+
 
 @layer base {
+  @theme {
+    --color-os2-100: "#4495ff";
+    --color-os2-200: "#2153EB"
+  }
+  
+  :root {
+    --color-os2-100: #4495ff;
+    --color-os2-200: #2153EB;
+  }
+  
   html {
     font-family: 'Inter', system-ui, sans-serif;
   }
   
   body {
-    @apply bg-gray-50 text-gray-900;
+    @apply text-base-content bg-base-100;
   }
 
   /* Custom scrollbar styling for all scrollable elements */
@@ -89,7 +102,7 @@
   }
   
   .btn-primary {
-    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-4 focus:ring-primary-300;
+    @apply text-white rounded-lg;
   }
   
   .btn-secondary {
@@ -102,11 +115,11 @@
 
   /* Custom scrollable container */
   .scrollable-container {
-    @apply overflow-y-auto overflow-x-hidden custom-scrollbar;
+    @apply overflow-y-auto overflow-x-hidden;
   }
 
   /* Dropdown scrollable area */
   .dropdown-scroll {
-    @apply overflow-y-auto overflow-x-hidden custom-scrollbar max-h-80;
+    @apply overflow-y-auto overflow-x-hidden max-h-80;
   }
 }

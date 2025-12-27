@@ -1,7 +1,8 @@
 {
-  "name": "Takeka - Open Source Svelte & Tailwind CSS Admin Dashboard Template",
+  "name": "RavenLens",
+  "description": "Simple AI Measurements for Revulutionizing Techs - UI Base upon Takeka",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,11 +13,12 @@
     "@melt-ui/pp": "^0.3.2",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.16",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
     "svelte": "^5.28.1",
-    "tailwindcss": "^3.4.0",
+    "tailwindcss": "^4.1.18",
     "vite": "^6.3.5"
   },
   "dependencies": {
@@ -28,8 +30,9 @@
     "@fullcalendar/timegrid": "^6.1.17",
     "@iconify/svelte": "^5.0.0",
     "@melt-ui/svelte": "^0.86.6",
+    "@tailwindcss/vite": "^4.1.18",
     "chart.js": "^4.5.0",
-    "daisyui": "^5.0.43",
+    "daisyui": "^5.5.14",
     "leaflet": "^1.9.4",
     "motion": "^12.18.1",
     "svelte-fullcalendar": "^3.0.0",

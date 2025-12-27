@@ -29,7 +29,7 @@
     />
     
     <!-- Main content area -->
-    <main class="flex-1 scrollable-container bg-base-200">
+    <main class="flex-1 scrollable-container bg-base-400">
       <div class="p-4 sm:p-6 lg:p-8">
         <slot />
       </div>

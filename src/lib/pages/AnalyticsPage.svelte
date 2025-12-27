@@ -10,6 +10,7 @@
     exportTopProductsData, 
     exportRecentActivityData 
   } from '../utils/export.js';
+    import PageTitleCardBtn from '../components/PageTitleCardBtn.svelte';
   
   // Analytics data
   let analyticsData = {
@@ -118,7 +119,7 @@
     showMetricSelect = false;
   }
 
-  function toggleExportMenu() {
+  function onToggleExportMenu() {
     showExportMenu = !showExportMenu;
   }
 
@@ -160,7 +161,7 @@
 
 <div class="space-y-8">
   <!-- Page header with enhanced styling -->
-  <div class="relative overflow-hidden bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-2xl p-6 border border-base-300/50" use:motionInView={{ animation: 'fadeInDown' }}>
+  <div class="relative dark:bg-base-100 overflow-visible bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-2xl p-6 border border-base-300/50" use:motionInView={{ animation: 'fadeInDown' }}>
     <!-- Background decorative elements -->
     <div class="absolute top-0 right-0 w-16 h-16 opacity-10">
       <Icon icon="heroicons:chart-bar" class="w-full h-full text-primary" />
@@ -259,22 +260,15 @@
         </div>
         
         <!-- Export button -->
-        <div class="relative export-menu">
-          <button 
-            class="btn btn-primary shadow-xl hover:shadow-2xl group relative overflow-hidden"
-            on:click={toggleExportMenu}
-            use:motionHover
-          >
-            <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="relative flex items-center">
-              <div class="p-1.5 rounded-lg bg-primary-content/20 group-hover:bg-primary-content/30 transition-colors duration-300">
-                <Icon icon="heroicons:arrow-down-tray" class="w-4 h-4 mr-2" />
-              </div>
-              {$_("analytics.export_report")}
-              <Icon icon="heroicons:chevron-down" class="w-4 h-4 ml-1" />
-            </div>
-          </button>
-          
+        <div class="relative export-menu overflow-visible">
+          <PageTitleCardBtn
+            content={$_("analytics.export_report")}
+            iconA="heroicons:arrow-down-tray"
+            iconB="heroicons:chevron-down"
+
+            on:click={onToggleExportMenu}
+          />
+
           {#if showExportMenu}
             <div class="absolute top-full mt-1 right-0 bg-base-100 border border-base-300 rounded-lg shadow-lg z-50 min-w-48">
               <div class="py-1">

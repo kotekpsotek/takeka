@@ -187,7 +187,7 @@
     <!-- Right side -->
     <div class="flex items-center space-x-4">
       <!-- Search -->
-      <div class="hidden md:block">
+      <!-- <div class="hidden md:block">
         <div class="relative">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <Icon icon="heroicons:magnifying-glass" class="w-4 h-4 text-base-content/40" />
@@ -198,10 +198,10 @@
             class="pl-10 pr-4 py-2 text-sm bg-base-200 border border-base-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-base-content placeholder-base-content/40"
           >
         </div>
-      </div>
+      </div> -->
       
       <!-- Language Switcher -->
-      <LanguageSwitcher />
+      <!-- <LanguageSwitcher /> -->
       
       <!-- Theme Toggle -->
       <ThemeToggle />
@@ -243,56 +243,6 @@
         
         {#if messageMenuOpen}
           <MessageDropdown isOpen={messageMenuOpen} onClose={closeMessageMenu} />
-        {/if}
-      </div>
-      
-      <!-- User menu -->
-      <div class="relative user-menu">
-        <button 
-          class="flex items-center space-x-3 p-2 rounded-lg hover:bg-base-200 focus:outline-none focus:ring-2 focus:ring-primary transition-colors duration-200"
-          on:click={toggleUserMenu}
-        >
-          <img 
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" 
-            alt="User avatar"
-            class="h-8 w-8 rounded-full object-cover bg-base-200"
-          >
-          <div class="hidden md:block text-left">
-            <p class="text-sm font-medium text-base-content">John Doe</p>
-            <p class="text-xs text-base-content/60">Administrator</p>
-          </div>
-          <Icon icon="heroicons:chevron-down" class="w-4 h-4 text-base-content/60" />
-        </button>
-        
-        <!-- Dropdown menu -->
-        {#if userMenuOpen}
-          <div 
-            bind:this={dropdownElement}
-            class="absolute right-0 mt-2 w-48 bg-base-100 rounded-lg shadow-lg border border-base-300 py-1 z-50"
-          >
-            <button 
-              class="w-full flex items-center px-4 py-2 text-sm text-base-content hover:bg-base-200 transition-colors duration-200"
-              on:click={handleProfile}
-            >
-              <Icon icon="heroicons:user-circle" class="w-4 h-4 mr-3" />
-              Profile
-            </button>
-            <button 
-              class="w-full flex items-center px-4 py-2 text-sm text-base-content hover:bg-base-200 transition-colors duration-200"
-              on:click={handleSettings}
-            >
-              <Icon icon="heroicons:cog-6-tooth" class="w-4 h-4 mr-3" />
-              Settings
-            </button>
-            <hr class="border-base-300 my-1">
-            <button 
-              class="w-full flex items-center px-4 py-2 text-sm text-error hover:bg-base-200 transition-colors duration-200"
-              on:click={handleLogout}
-            >
-              <Icon icon="heroicons:arrow-right-on-rectangle" class="w-4 h-4 mr-3" />
-              Sign out
-            </button>
-          </div>
         {/if}
       </div>
     </div>

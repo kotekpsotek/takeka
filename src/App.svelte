@@ -50,11 +50,11 @@
       : $currentRoute === '/maps' ? MapsPage
       : $currentRoute === '/schedule' ? SchedulePage
       : $currentRoute === '/auth/login' ? LoginPage
-      : $currentRoute === '/auth/login-v2' ? LoginV2
-      : $currentRoute === '/auth/login-v3' ? LoginV3
+      // : $currentRoute === '/auth/login-v2' ? LoginV2
+      // : $currentRoute === '/auth/login-v3' ? LoginV3
       : $currentRoute === '/auth/register' ? RegisterPage
-      : $currentRoute === '/auth/register-v2' ? RegisterV2
-      : $currentRoute === '/auth/register-v3' ? RegisterV3
+      // : $currentRoute === '/auth/register-v2' ? RegisterV2
+      // : $currentRoute === '/auth/register-v3' ? RegisterV3
       : $currentRoute === '/gantt' ? GanttPage
       : NotFoundPage;
   }
@@ -97,10 +97,7 @@
 
   // Timer for loading spinner (separate, not async)
   onMount(() => {
-    const timer = setTimeout(() => {
-      loading = false;
-    }, 3000);
-    return () => clearTimeout(timer);
+    loading = false;
   });
 </script>
 
