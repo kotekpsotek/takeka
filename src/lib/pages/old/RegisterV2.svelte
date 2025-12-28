@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
-  import { navigate } from '../router.js';
-  import { motionInView, motionHover } from '../utils/motion.js';
+  import { navigate } from '../../router.js';
+  import { motionInView, motionHover } from '../../utils/motion.js';
   import Icon from '@iconify/svelte';
   import { _ } from 'svelte-i18n';
   

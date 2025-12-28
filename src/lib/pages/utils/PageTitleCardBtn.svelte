@@ -1,6 +1,6 @@
 <script lang=ts>
     import Icon from "@iconify/svelte";
-    import { motionHover } from "../utils/motion";
+    import { motionHover } from "../../utils/motion";
 
     export let content: string;
     export let iconA: string | undefined = undefined;

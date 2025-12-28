@@ -1,22 +1,15 @@
 import { writable } from 'svelte/store';
 import HomePage from './pages/HomePage.svelte';
-import UsersPage from './pages/UsersPage.svelte';
-import ProductsPage from './pages/ProductsPage.svelte';
-import AnalyticsPage from './pages/AnalyticsPage.svelte';
-import ProjectManagementPage from './pages/ProjectManagementPage.svelte';
-import MapsPage from './pages/MapsPage.svelte';
-import SchedulePage from './pages/SchedulePage.svelte';
+import WorkspaceMembers from './pages/WorkspaceMembers.svelte';
 import ProfilePage from './pages/ProfilePage.svelte';
-import SettingsPage from './pages/SettingsPage.svelte';
 import LoginPage from './pages/LoginPage.svelte';
-import LoginV2 from './pages/LoginV2.svelte';
-import LoginV3 from './pages/LoginV3.svelte';
 import RegisterPage from './pages/RegisterPage.svelte';
-import RegisterV2 from './pages/RegisterV2.svelte';
-import RegisterV3 from './pages/RegisterV3.svelte';
 import NotFoundPage from './pages/NotFoundPage.svelte';
-import ChartsPage from './pages/ChartsPage.svelte';
-import GanttPage from './pages/GanttPage.svelte';
+import PromptsPage from "./pages/PromptsPage.svelte";
+import LensPage from "./pages/LensPage.svelte";
+import ApiPage from "./pages/ApiPage.svelte";
+import HelpPage from "./pages/HelpPage.svelte";
+import RepoSettingsPage from "./pages/RepoSettingsPage.svelte"
 
 // Create stores for routing
 const currentRoute = writable(window.location.pathname);
@@ -25,22 +18,15 @@ const navigationHistory = writable([]);
 // Define routes
 const routes = {
   '/': HomePage,
-  '/users': UsersPage,
-  '/products': ProductsPage,
-  '/analytics': AnalyticsPage,
-  '/projects': ProjectManagementPage,
-  '/gantt': GanttPage,
-  '/maps': MapsPage,
-  '/schedule': SchedulePage,
+  '/workspacemembers': WorkspaceMembers,
+  '/prompts': PromptsPage,
+  '/lens': LensPage,
+  '/api': ApiPage,
+  '/help': HelpPage,
+  '/repo-settings': RepoSettingsPage,
   '/profile': ProfilePage,
-  '/settings': SettingsPage,
   '/auth/login': LoginPage,
-  '/auth/login-v2': LoginV2,
-  '/auth/login-v3': LoginV3,
   '/auth/register': RegisterPage,
-  '/auth/register-v2': RegisterV2,
-  '/auth/register-v3': RegisterV3,
-  '/charts': ChartsPage,
   '*': NotFoundPage
 };
 

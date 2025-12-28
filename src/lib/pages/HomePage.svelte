@@ -1,4 +1,4 @@
-<script>
+<script lang=ts>
   import { onMount } from "svelte";
   import Icon from "@iconify/svelte";
   import {
@@ -13,6 +13,9 @@
     motionHover,
   } from "../utils/motion.js";
   import { sampleData } from "../data/charts.js";
+    import PageWrapper from "./PageWrapper.svelte";
+    import { theme, THEMES } from "../stores/theme.js";
+    import PageTitleCard from "./utils/PageTitleCard.svelte";
 
   let chart;
   let statsElements = [];
@@ -83,31 +86,28 @@
   });
 </script>
 
-<div class="space-y-8">
-  <!-- Page header with enhanced styling -->
-  <div
-    class="relative overflow-hidden bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-2xl p-6 border border-base-300/50"
-    use:motionInView={{ animation: "fadeInDown" }}
+<PageWrapper>
+  <!-- Page card -->
+  <PageTitleCard
+    icons={[
+        {
+          name: "heroicons:chart-bar",
+          classAllocation: "top-0 right-0 w-16 h-16",
+          color: THEMES.DARK === $theme ? "white" : ""
+        },
+        {
+          name: "heroicons:sparkles",
+          classAllocation: "top-12 right-12 w-16 h-16",
+          color: THEMES.DARK === $theme ? "white" : ""
+        }
+    ]}
+    cardName="Workspace Dashboard"
   >
-    <!-- Background decorative elements -->
-    <div class="absolute top-0 right-0 w-16 h-16 opacity-10">
-      <Icon icon="heroicons:chart-bar" class="w-full h-full text-primary" />
-    </div>
-    <div class="absolute bottom-0 left-0 w-24 h-24 opacity-10">
-      <Icon icon="heroicons:sparkles" class="w-full h-full text-secondary" />
-    </div>
+    <p slot="description">
+      Welcome back! Here's what's happening with your projects today.
+    </p>
 
-    <div class="relative flex items-center justify-between">
-      <div>
-        <h1
-          class="text-3xl font-bold text-primary"
-        >
-          Dashboard
-        </h1>
-        <p class="mt-2 text-sm text-base-content/70 max-w-md">
-          Welcome back! Here's what's happening with your projects today.
-        </p>
-      </div>
+    <svelte:fragment slot="buttons">
       <button
         class="btn btn-primary shadow-xl hover:shadow-2xl group relative overflow-hidden"
         use:motionHover
@@ -124,8 +124,8 @@
           New Project
         </div>
       </button>
-    </div>
-  </div>
+    </svelte:fragment>
+  </PageTitleCard>
 
   <!-- Enhanced Stats grid with gradient backgrounds -->
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -378,4 +378,4 @@
       {/each}
     </div>
   </div>
-</div>
+</PageWrapper>

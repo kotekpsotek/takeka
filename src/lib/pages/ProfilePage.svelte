@@ -1,9 +1,12 @@
-<script>
+<script lang=ts>
   import Icon from '@iconify/svelte';
   import { motionInView, motionHover } from '../utils/motion.js';
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
   import DeleteConfirmationModal from '../components/DeleteConfirmationModal.svelte';
+    import PageWrapper from './PageWrapper.svelte';
+    import PageTitleCard from './utils/PageTitleCard.svelte';
+    import { theme, THEMES } from '../stores/theme.js';
 
   // User profile data
   let profile = {
@@ -210,29 +213,29 @@
   }
 </script>
 
-<div class="space-y-6">
-  <!-- Page header with enhanced styling -->
-  <div
-    class="relative overflow-hidden bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-2xl p-6 border border-base-300/50"
-    use:motionInView={{ animation: "fadeInDown" }}
+<PageWrapper>
+  <!-- Page card -->
+  <PageTitleCard
+    icons={[
+      {
+        name: "heroicons:user-circle",
+        classAllocation: "top-0 right-0 w-16 h-16",
+        color: THEMES.DARK === $theme ? "white" : ""
+      },
+      {
+        name: "heroicons:identification",
+        classAllocation: "top-13 right-13 w-16 h-16",
+        color: THEMES.DARK === $theme ? "white" : ""
+      }
+    ]}
+    cardName={$_('profile.title')}
   >
-    <!-- Background decorative elements -->
-    <div class="absolute top-0 right-0 w-16 h-16 opacity-10">
-      <Icon icon="heroicons:user-circle" class="w-full h-full text-primary" />
-    </div>
-    <div class="absolute bottom-0 left-0 w-24 h-24 opacity-10">
-      <Icon icon="heroicons:identification" class="w-full h-full text-secondary" />
-    </div>
+    <p slot="description">
+      {$_("profile.description")}
+    </p>
 
-    <div class="relative flex items-center justify-between">
-      <div>
-        <h1 class="text-3xl font-bold text-primary">{$_('profile.title')}</h1>
-        <p class="mt-2 text-sm text-base-content/70 max-w-md">
-          {$_('profile.description')}
-        </p>
-      </div>
-      <div class="flex items-center space-x-3">
-        <button
+    <svelte:fragment slot="buttons">
+      <button
           class="btn btn-outline shadow-md hover:shadow-lg group relative overflow-hidden"
           on:click={() => showNotificationModal = true}
           use:motionHover
@@ -266,9 +269,8 @@
             {isEditing ? $_('profile.save') : $_('profile.edit')}
           </div>
         </button>
-      </div>
-    </div>
-  </div>
+    </svelte:fragment>
+  </PageTitleCard>  
 
   <!-- Profile Stats -->
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4" use:motionInView={{ animation: 'fadeInUp' }}>
@@ -656,7 +658,7 @@
       </div>
     </div>
   </div>
-</div>
+</PageWrapper>
 
 <!-- Avatar Upload Modal -->
 {#if showAvatarModal}

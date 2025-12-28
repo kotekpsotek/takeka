@@ -33,31 +33,29 @@
     if ($isLoading) {
       const fallbackMap = {
         '/': 'Home',
-        '/users': 'Users', 
-        '/products': 'Products',
-        '/analytics': 'Analytics',
-        '/settings': 'Settings',
-        '/maps': 'Maps',
-        '/schedule': 'Schedule',
-        '/profile': 'Profile',
-        '/projects': 'Projects'
+        '/workspacemembers': 'Workspace Members', 
+        '/prompts': 'Prompts',
+        '/lens': 'Lens',
+        '/api': 'API',
+        '/help': 'Help',
+        '/repo-settings': 'Repo Settings',
+        '/profile': "Profile"
       };
-      return fallbackMap[route] || 'Home';
+      return fallbackMap[route] || 'Unknown';
     }
     
     const routeMap = {
       '/': $_('navigation.home'),
-      '/users': $_('navigation.users'), 
-      '/products': $_('navigation.products'),
-      '/analytics': $_('navigation.analytics'),
-      '/settings': $_('navigation.settings'),
-      '/maps': $_('navigation.maps'),
-      '/schedule': $_('navigation.schedule'),
-      '/profile': $_('navigation.profile'),
-      '/projects': $_('navigation.projects')
+      '/workspacemembers': $_('navigation.workspaceMembers'), 
+      '/prompts': $_('navigation.prompts'),
+      '/lens': $_("navigation.lens"),
+      '/api': $_("navigation.api"),
+      '/help': $_("second_cattegory.help"),
+      '/repo-settings': $_("second_cattegory.repo_settings"),
+      '/profile': $_("navigation.profile")
     };
     
-    return routeMap[route] || $_('navigation.home');
+    return routeMap[route] || "Unknown";
   }
   
   // Reactive statement for current page name
@@ -109,40 +107,6 @@
     messageMenuOpen = false;
   }
   
-  function handleLogout() {
-    // Array of login version paths
-    const loginPaths = [
-      '/auth/login',
-      '/auth/login-v2',
-      '/auth/login-v3'
-    ];
-    
-    // Get random login path
-    const randomIndex = Math.floor(Math.random() * loginPaths.length);
-    const randomLoginPath = loginPaths[randomIndex];
-    
-    // Close user menu first
-    closeUserMenu();
-    
-    // Small delay to allow menu animation to complete
-    setTimeout(() => {
-      // Navigate to random login page
-      navigate(randomLoginPath);
-    }, 150);
-  }
-  
-  function handleProfile() {
-    // Navigate to profile page
-    navigate('/profile');
-    closeUserMenu();
-  }
-  
-  function handleSettings() {
-    // Navigate to settings page
-    navigate('/settings');
-    closeUserMenu();
-  }
-
   // Close menus when clicking outside
   function handleClickOutside(event) {
     if (userMenuOpen && !event.target.closest('.user-menu')) {

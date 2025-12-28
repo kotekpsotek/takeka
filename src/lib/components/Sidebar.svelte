@@ -27,17 +27,11 @@
   // Create translated menu items with fallbacks
   const translatedMenuItems: MenuItem[] = [
     { path: '/', icon: 'heroicons:home', name: $isLoading ? 'Home' : $_('navigation.home') },
-    { path: '/users', icon: 'heroicons:users', name: $isLoading ? 'Users' : $_('navigation.users') },
-    { path: '/products', icon: 'heroicons:cube', name: $isLoading ? 'Products' : $_('navigation.products') },
-    { path: '/analytics', icon: 'heroicons:chart-bar', name: $isLoading ? 'Analytics' : $_('navigation.analytics') },
-    { path: '/charts', icon: 'heroicons:presentation-chart-line', name: $isLoading ? 'Charts' : $_('navigation.charts') },
-    { path: '/projects', icon: 'heroicons:view-columns', name: $isLoading ? 'Projects' : $_('navigation.projects') },
-    { path: '/gantt', icon: 'heroicons:calendar', name: $isLoading ? 'Gantt' : 'Gantt' },
-    { path: '/maps', icon: 'heroicons:map', name: $isLoading ? 'Maps' : $_('navigation.maps') },
-    { path: '/schedule', icon: 'heroicons:calendar-days', name: $isLoading ? 'Schedule' : $_('navigation.schedule') },
+    { path: '/workspacemembers', icon: 'heroicons:users', name: $isLoading ? 'Workspace Members' : $_('navigation.workspaceMembers') },
+    { path: '/prompts', icon: 'material-symbols:text-ad-outline-rounded', name: $isLoading ? 'Prompts' : $_('navigation.prompts') },
+    { path: "/lens", icon: "material-symbols:labs-outline-rounded", name: $isLoading ? "Lens" : $_("navigation.lens") },
+    { path: "/api", icon: "material-symbols:api-rounded", name: $isLoading ? "API" : $_("navigation.api") }
   ];
-  /* { path: '/profile', icon: 'heroicons:user-circle', name: $isLoading ? 'Profile' : $_('navigation.profile') },
-  { path: '/settings', icon: 'heroicons:cog-6-tooth', name: $isLoading ? 'Settings' : $_('navigation.settings') } */
   
   //
   const secondCattegoryMenu: MenuItem[] = [
@@ -73,7 +67,7 @@
   }
 
   function onDirectToProfile() {
-
+    navigate("/profile")
   }
 
   function onSearchToggle() {
@@ -86,24 +80,13 @@
   
   // Add logout function
   function handleLogout() {
-    // Array of login version paths
-    const loginPaths = [
-      '/auth/login',
-      '/auth/login-v2',
-      '/auth/login-v3'
-    ];
-    
-    // Get random login path
-    const randomIndex = Math.floor(Math.random() * loginPaths.length);
-    const randomLoginPath = loginPaths[randomIndex];
-    
     // Close sidebar first
     closeSidebar();
     
     // Small delay to allow sidebar animation to complete
     setTimeout(() => {
       // Navigate to random login page
-      navigate(randomLoginPath);
+      navigate('/auth/login');
     }, 150);
   }
 
@@ -231,7 +214,7 @@
           <a
             bind:this={menuItemsElements[i]}
             href={secondCattegoryItem.path}
-            class="w-fit flex gap-3 items-center p-2 px-4 text-xs font-medium rounded-lg transition-colors duration-200 {$currentRoute === secondCattegoryItem.path ? 'bg-blue-500/10 text-blue-600 border border-blue-500/20' : 'text-base-content/50 hover:bg-base-200 hover:text-base-content'}"
+            class="w-full flex gap-3 items-center p-2 px-4 text-xs font-medium rounded-lg transition-colors duration-200 {$currentRoute === secondCattegoryItem.path ? 'bg-blue-500/10 text-blue-600 border border-blue-500/20' : 'text-base-content/50 hover:bg-base-200 hover:text-base-content'}"
             on:click|preventDefault={() => handleMenuClick(secondCattegoryItem.path)}
             use:motionInView={{ animation: 'fadeInLeft', delay: i * 0.1 }}
           >
@@ -262,7 +245,7 @@
           class="w-10 h-10 rounded-full object-cover bg-base-200"
         >
         {#if !$isLeftStripeToggled}
-          <div class="ml-3 flex-1 min-w-0">
+          <div class="ml-3 flex-1 min-w-0 text-start">
             <p class="text-sm font-medium text-base-content truncate">John Doe</p>
             <p class="text-xs text-base-content/60 truncate">john.doe@example.com</p>
           </div>
