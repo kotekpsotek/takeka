@@ -38,7 +38,7 @@
         '/lens': 'Lens',
         '/api': 'API',
         '/help': 'Help',
-        '/repo-settings': 'Repo Settings',
+        '/repo-settings': 'Workspace Settings',
         '/profile': "Profile"
       };
       return fallbackMap[route] || 'Unknown';
@@ -51,7 +51,7 @@
       '/lens': $_("navigation.lens"),
       '/api': $_("navigation.api"),
       '/help': $_("second_cattegory.help"),
-      '/repo-settings': $_("second_cattegory.repo_settings"),
+      '/repo-settings': $_("second_cattegory.workspaceSettings"),
       '/profile': $_("navigation.profile")
     };
     

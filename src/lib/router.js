@@ -9,7 +9,7 @@ import PromptsPage from "./pages/PromptsPage.svelte";
 import LensPage from "./pages/LensPage.svelte";
 import ApiPage from "./pages/ApiPage.svelte";
 import HelpPage from "./pages/HelpPage.svelte";
-import RepoSettingsPage from "./pages/RepoSettingsPage.svelte"
+import WorkspaceSettingsPage from "./pages/WorkspaceSettingsPage.svelte"
 
 // Create stores for routing
 const currentRoute = writable(window.location.pathname);
@@ -23,7 +23,7 @@ const routes = {
   '/lens': LensPage,
   '/api': ApiPage,
   '/help': HelpPage,
-  '/repo-settings': RepoSettingsPage,
+  '/repo-settings': WorkspaceSettingsPage,
   '/profile': ProfilePage,
   '/auth/login': LoginPage,
   '/auth/register': RegisterPage,

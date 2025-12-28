@@ -36,7 +36,7 @@
   //
   const secondCattegoryMenu: MenuItem[] = [
     { path: "/help", icon: "material-symbols:help-outline-rounded", name: $isLoading ? "Help" : $_("second_cattegory.help") },
-    { path: "/repo-settings", icon: "material-symbols:settings-outline-rounded", name: $isLoading ? "Repo Settings" : $_("second_cattegory.repo_settings") }
+    { path: "/repo-settings", icon: "material-symbols:settings-outline-rounded", name: $isLoading ? "Repo Settings" : $_("second_cattegory.workspace_settings") }
   ]
   
   function closeSidebar() {

@@ -40,7 +40,7 @@
   },
   "second_cattegory": {
     "help": "Help",
-    "repo_settings": "Repo Settings"
+    "workspace_settings": "Workspace Settings"
   },
   "users": {
     "title": "Users",
@@ -93,9 +93,9 @@
     "heading": "Help",
     "description": "Meet materials will help in any task accomplishement on RavenLens"
   },
-  "repoSettings": {
-    "heading": "Repo Settings",
-    "description": "Configuration for this repo"
+  "workspaceSettings": {
+    "heading": "Workspace Settings",
+    "description": "Configuration for this workspace"
   },
   "products": {
     "title": "Products",

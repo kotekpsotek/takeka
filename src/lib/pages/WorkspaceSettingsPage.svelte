@@ -15,10 +15,10 @@
                 color: THEMES.DARK === $theme ? "white" : ""
             }
         ]}
-        cardName={$_("repoSettings.heading")}
+        cardName={$_("workspaceSettings.heading")}
     >
         <svelte:fragment slot="description">
-            {$_("repoSettings.description")}
+            {$_("workspaceSettings.description")}
         </svelte:fragment>
     </PageTitleCard>
 </PageWrapper>

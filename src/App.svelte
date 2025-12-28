@@ -19,7 +19,7 @@
   import LensPage from "./lib/pages/LensPage.svelte";
   import ApiPage from "./lib/pages/ApiPage.svelte";
   import HelpPage from "./lib/pages/HelpPage.svelte";
-  import RepoSettingsPage from "./lib/pages/RepoSettingsPage.svelte"
+  import WorkspaceSettingsPage from "./lib/pages/WorkspaceSettingsPage.svelte"
 
   //
   let current;
@@ -41,7 +41,7 @@
       : $currentRoute === '/lens' ? LensPage
       : $currentRoute === '/api' ? ApiPage
       : $currentRoute === "/help" ? HelpPage
-      : $currentRoute === '/repo-settings' ? RepoSettingsPage
+      : $currentRoute === '/repo-settings' ? WorkspaceSettingsPage
       : $currentRoute === '/profile' ? ProfilePage
       : $currentRoute === '/auth/login' ? LoginPage
       : $currentRoute === '/auth/register' ? RegisterPage

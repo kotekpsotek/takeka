@@ -1,6 +1,9 @@
 <script>
   import Sidebar from './Sidebar.svelte';
   import Header from './Header.svelte';
+  import { isSearchOpen, isWorkspaceSelectionOpen } from '../stores/state';
+  import WorkspaceSelectionModal from './modals/WorkspaceSelectionModal.svelte';
+    import SearchModal from './modals/SearchModal.svelte';
   
   let sidebarOpen = false;
   
@@ -21,7 +24,13 @@
   />
   
   <!-- Main content wrapper -->
-  <div class="flex-1 flex flex-col overflow-hidden">
+  <div class="relative flex-1 flex flex-col overflow-hidden">
+    {#if $isWorkspaceSelectionOpen}
+      <WorkspaceSelectionModal/>
+    {:else if $isSearchOpen}
+      <SearchModal/>
+    {/if}
+    
     <!-- Header -->
     <Header 
       sidebarOpen={sidebarOpen} 
