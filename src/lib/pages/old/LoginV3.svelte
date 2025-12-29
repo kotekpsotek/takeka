@@ -32,8 +32,8 @@
       <div class="flex justify-center mb-8">
         <div class="relative">
           <div class="absolute -inset-4 bg-gradient-to-r from-[#6366f1] to-[#0ea5e9] rounded-full blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-          <img src="/logo-light.svg" alt="Logo" class="h-12 relative dark:hidden" />
-          <img src="/logo-dark.svg" alt="Logo" class="h-12 relative hidden dark:block" />
+          <img src="/ravenlens.svg" alt="Logo" class="h-12 relative dark:hidden" />
+          <img src="/ravenlens.svg" alt="Logo" class="h-12 relative hidden dark:block" />
         </div>
       </div>
       

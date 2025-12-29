@@ -28,7 +28,7 @@
     </div>
     <div class="relative w-full flex items-center justify-center p-12 text-center">
       <div class="space-y-6">
-        <img src="/logo-light.svg" alt="Logo" class="h-12 mx-auto filter brightness-0 invert" />
+        <img src="/ravenlens.svg" alt="Logo" class="h-12 mx-auto filter brightness-0 invert" />
         <h1 class="text-3xl font-bold text-white">Welcome to Dashboard</h1>
         <p class="text-lg text-white/80 max-w-md mx-auto">
           Streamline your workflow with our intuitive dashboard. Manage everything in one place.
@@ -42,8 +42,8 @@
     <div class="w-full max-w-md space-y-8 px-4">
       <!-- Logo for mobile -->
       <div class="lg:hidden flex justify-center">
-        <img src="/logo-light.svg" alt="Logo" class="h-10 dark:hidden" />
-        <img src="/logo-dark.svg" alt="Logo" class="h-10 hidden dark:block" />
+        <img src="/ravenlens.svg" alt="Logo" class="h-10 dark:hidden" />
+        <img src="/ravenlens.svg" alt="Logo" class="h-10 hidden dark:block" />
       </div>
 
       <!-- Header -->

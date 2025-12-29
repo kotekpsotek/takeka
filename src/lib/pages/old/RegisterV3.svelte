@@ -36,8 +36,8 @@
     <div class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 z-10">
       <!-- Logo -->
       <div class="flex justify-center mb-8">
-        <img src="/logo-light.svg" alt="Logo" class="h-10 dark:hidden" />
-        <img src="/logo-dark.svg" alt="Logo" class="h-10 hidden dark:block" />
+        <img src="/ravenlens.svg" alt="Logo" class="h-10 dark:hidden" />
+        <img src="/ravenlens.svg" alt="Logo" class="h-10 hidden dark:block" />
       </div>
 
       <!-- Header -->

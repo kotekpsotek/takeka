@@ -121,7 +121,7 @@
   >
     <div class="flex items-center justify-center h-16 {!$isLeftStripeToggled ? "px-6" : ""} flex-shrink-0">
       {#if !$isLeftStripeToggled}
-        <ThemeLogo width="w-32" height="h-8" alt="Takeka Logo" />
+        <ThemeLogo width="w-[140px]" height="h-fit" alt="Takeka Logo" />
       {/if}
     </div>
       

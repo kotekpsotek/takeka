@@ -40,8 +40,8 @@
          use:motionInView={{ animation: 'fadeInUp' }}>
       <!-- Logo -->
       <div class="flex justify-center mb-6" use:motionInView={{ animation: 'fadeInDown' }}>
-        <img src="/logo-light.svg" alt="Logo" class="h-10 dark:hidden" />
-        <img src="/logo-dark.svg" alt="Logo" class="h-10 hidden dark:block" />
+        <img src="/ravenlens.svg" alt="Logo" class="dark:hidden" />
+        <img src="/ravenlens.svg" alt="Logo" class="hidden dark:block" />
       </div>
       
       <!-- Header -->

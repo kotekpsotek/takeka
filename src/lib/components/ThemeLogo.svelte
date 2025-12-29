@@ -10,14 +10,14 @@
   let mounted = false;
   
   // Reactive logo path based on theme
-  $: logoSrc = $theme === THEMES.DARK ? '/logo-dark.svg' : '/logo-light.svg';
+  $: logoSrc = $theme === THEMES.DARK ? '/ravenlens.svg' : '/ravenlens.svg';
   
   onMount(() => {
     // Preload both logos for smooth switching
     const preloadLight = new Image();
     const preloadDark = new Image();
-    preloadLight.src = '/logo-light.svg';
-    preloadDark.src = '/logo-dark.svg';
+    preloadLight.src = '/ravenlens.svg';
+    preloadDark.src = '/ravenlens.svg';
     
     mounted = true;
   });
@@ -34,7 +34,7 @@
     <img 
       src={logoSrc} 
       {alt}
-      class="max-w-full max-h-full object-contain transition-all duration-300 ease-in-out"
+      class="object-contain transition-all duration-300 ease-in-out"
       loading="eager"
       on:error={handleError}
     />
